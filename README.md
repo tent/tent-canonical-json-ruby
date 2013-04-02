@@ -1,4 +1,4 @@
-# TentCanonicalJson
+# TentCanonicalJson [![Build Status](https://travis-ci.org/tent/tent-canonical-json-ruby.png)](https://travis-ci.org/tent/tent-canonical-json-ruby)
 
 Derive Tent canonical json from post.
 
