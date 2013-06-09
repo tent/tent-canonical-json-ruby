@@ -5,19 +5,19 @@ require "yajl"
 class TentCanonicalJson
   REMOVE = %w[ /permissions /received_at /version/received_at /version/id ].freeze
   REMOVE_MATCHING = {
-    "/mentions/*/public" => false
+    "/mentions/~/public" => false
   }.freeze
   MOVE = {
     "/original_entity" => "/entity",
-    "/mentions/*/original_entity" => "/mentions/{index}/entity",
-    "/version/parents/*/original_entity" => "/version/parents/{index}/entity"
+    "/mentions/~/original_entity" => "/mentions/{index}/entity",
+    "/version/parents/~/original_entity" => "/version/parents/{index}/entity"
   }.freeze
   REMOVE_EMPTY = %w[ /app /attachments /mentions /content /licenses /version/parents /version/message /version ].freeze
   REMOVE_MATCHING_PATHS = {
-    "/version/parents/*/post" => "/id",
-    "/version/parents/*/entity" => "/entity",
-    "/mentions/*/post" => "/id",
-    "/mentions/*/entity" => "/entity"
+    "/version/parents/~/post" => "/id",
+    "/version/parents/~/entity" => "/entity",
+    "/mentions/~/post" => "/id",
+    "/mentions/~/entity" => "/entity"
   }.freeze
 
   def self.encode(post)
@@ -45,7 +45,7 @@ class TentCanonicalJson
       pointer = JsonPointer.new(@post, path)
       next unless pointer.exists?
 
-      if path =~ %r{/\*/}
+      if path =~ %r{/~/}
         pointer.value.each_with_index do |value, index|
           next unless value
           target_pointer = JsonPointer.new(@post, target_path.sub('{index}', index.to_s))
