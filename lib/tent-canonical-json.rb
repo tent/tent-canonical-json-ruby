@@ -10,14 +10,17 @@ class TentCanonicalJson
   MOVE = {
     "/original_entity" => "/entity",
     "/mentions/~/original_entity" => "/mentions/{index}/entity",
+    "/refs/~/original_entity" => "/refs/{index}/entity",
     "/version/parents/~/original_entity" => "/version/parents/{index}/entity"
   }.freeze
-  REMOVE_EMPTY = %w[ /app /attachments /mentions /content /licenses /version/parents /version/message /version ].freeze
+  REMOVE_EMPTY = %w[ /app /attachments /mentions /refs /content /licenses /version/parents /version/message /version ].freeze
   REMOVE_MATCHING_PATHS = {
     "/version/parents/~/post" => "/id",
     "/version/parents/~/entity" => "/entity",
     "/mentions/~/post" => "/id",
-    "/mentions/~/entity" => "/entity"
+    "/mentions/~/entity" => "/entity",
+    "/refs/~/post" => "/id",
+    "/refs/~/entity" => "/entity"
   }.freeze
 
   def self.encode(post)
