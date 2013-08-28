@@ -123,6 +123,37 @@ describe TentCanonicalJson do
       end
 
       it_behaves_like "a canonical json encode method"
+
+      context "with null app members" do
+        let(:post) do
+          {
+            :id => "d8a3884345df0d6854d4bec893a4649e",
+            :entity => "https://entity.example.org",
+            :type => "https://example.com/types/foo/v0#",
+            :published_at => time,
+            :version => {
+              :published_at => time,
+              :parents => [],
+              :message => "",
+            },
+            :content => {},
+            :mentions => [],
+            :licenses => [],
+            :app => {
+              :name => nil,
+              :url => nil,
+              :id => nil
+            },
+            :attachments => [],
+          }
+        end
+
+        let(:encoded_post) do
+          %({"entity":"https://entity.example.org","id":"d8a3884345df0d6854d4bec893a4649e","published_at":#{time},"type":"https://example.com/types/foo/v0#","version":{"published_at":#{time}}})
+        end
+
+        it_behaves_like "a canonical json encode method"
+      end
     end
 
     context "with redundant members" do
