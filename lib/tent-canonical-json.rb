@@ -116,7 +116,7 @@ class TentCanonicalJson
       memo
     end
     json = sorted_keys.map do |key|
-      "#{key.to_s.inspect}:#{encoded_values[key]}"
+      "#{key.to_s.inspect.gsub("\\n", "\n")}:#{encoded_values[key]}"
     end.join(",")
     "{#{json}}"
   end
